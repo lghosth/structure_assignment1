@@ -40,7 +40,7 @@ AVL_tree Insert_node(AVL_tree T, int data){
     } else{
         if(data < T->data){
             T->lchild = Insert_node(T->lchild,data);//递归插入左子树
-        } else(data > T->data){
+        } else if(data > T->data){
             T->rchild = Insert_node(T->rchild,data);//递归插入右子树
         }
     }
