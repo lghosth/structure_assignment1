@@ -27,6 +27,7 @@ void Pre_orderTraversal(AVL_tree T);//先序遍历输出
 void Post_orderTraversal(AVL_tree T);//后序遍历输出
 void In_orderVisitBF(AVL_tree T);//中序遍历输出每个节点的平衡值
 int GetHeight(AVL_tree T);//得到树高
+int GetBF(AVL_tree T);//得到该节点的平衡因子
 
 //按照二叉查找树插入值
 AVL_tree Insert_node(AVL_tree T, int data){
@@ -50,7 +51,7 @@ AVL_tree Insert_node(AVL_tree T, int data){
 void In_orderTraversal(AVL_tree T){
     if( T ){
         In_orderTraversal( T->lchild );
-        printf("\n中序遍历输出：\n%d ",T->data);
+        printf("%d ",T->data);
         In_orderTraversal( T->rchild );
     }
 }
@@ -65,5 +66,26 @@ int GetHeight(AVL_tree T){
         return Max(lHeight,rHeight)+1;
     }
 }
+
+//中序遍历输出每个节点的平衡值
+void In_orderVisitBF(AVL_tree T){
+    if(!T){
+        printf("！所给树节点为空！");
+    } else{
+        In_orderTraversal( T->lchild );
+        printf("%d ",GetBF(T));
+        In_orderTraversal( T->rchild );
+    }
+}
+
+
+//得到该节点的平衡因子
+int GetBF(AVL_tree T){
+    int a = GetHeight(T->lchild) - GetHeight(T->rchild);
+    a = abs(a);
+    T->bf = a;
+    return a;
+}
+
 
 #endif //STRUCTURE_ASSIGNMENT1_HEAD_H
